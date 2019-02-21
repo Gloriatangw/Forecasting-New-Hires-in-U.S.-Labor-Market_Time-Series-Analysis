@@ -1,0 +1,512 @@
+geom_bar(stat="identity", fill = 'blue')+
+xlab('Name') +
+ylab('Percentage of Total URLS requests by google') +
+ggtitle('Frequency Distribution of Abuser Label') +
+scale_y_continuous(labels=scales::comma) +
+theme_bw() +
+theme(axis.text.x =element_text(size=16),
+axis.text.y=element_text(size=16),
+title=element_text(size=12),
+plot.title = element_text(hjust = 0.5))+
+coord_flip()
+ggplot(total_submit,aes(x = Reporting.organization.name,y=percent*100),a.rm = FALSE) +
+geom_bar(stat="identity", fill = 'blue')+
+xlab('Name') +
+ylab('Percentage of Total URLS requests by google') +
+ggtitle('Frequency Distribution of Abuser Label') +
+scale_y_continuous(labels=scales::comma) +
+theme_bw() +
+theme(axis.text.x =element_text(size=16),
+axis.text.y=element_text(size=16),
+title=element_text(size=12),
+plot.title = element_text(hjust = 0.5))+
+coord_flip()
+ggplot(total_submit,aes(x = reorder(Reporting.organization.name,percent),y=percent*100),a.rm = FALSE) +
+geom_bar(stat="identity", fill = 'blue')+
+xlab('Name') +
+ylab('Percentage of Total URLS removal requests received by google') +
+ggtitle('Frequency Distribution of Abuser Label') +
+scale_y_continuous(labels=scales::comma) +
+theme_bw() +
+theme(axis.text.x =element_text(size=16),
+axis.text.y=element_text(size=16),
+title=element_text(size=12),
+plot.title = element_text(hjust = 0.5))+
+coord_flip()
+View(request)
+report.org.20per = report.org %>%
+group_by(Reporting.organization.name) %>%
+summarise(count=n()) %>%
+mutate(per = count/sum(count))
+######
+######DQR
+report.org = select(request,Reporting.organization.name)
+# barchart
+report.org.20 = report.org %>%
+group_by(Reporting.organization.name) %>%
+summarise(count=n()) %>%
+arrange(desc(count)) %>%
+head(20)
+report.org.20per = report.org %>%
+group_by(Reporting.organization.name) %>%
+summarise(count=n()) %>%
+mutate(per = count/sum(count))
+View(report.org.20per)
+arrange(desc(count))
+arrange(desc(count))
+report.org.20per = report.org %>%
+group_by(Reporting.organization.name) %>%
+summarise(count=n()) %>%
+mutate(per = count/sum(count))
+View(report.org.20per)
+report.org.20per = report.org %>%
+group_by(Reporting.organization.name) %>%
+summarise(count=n()) %>%
+arrange(desc(count)) %>%
+head(2400)
+View(report.org.20per)
+report.org.20per = report.org %>%
+group_by(Reporting.organization.name) %>%
+summarise(count=n()) %>%
+arrange(desc(count)) %>%
+head(2400) %>%
+mutate(per = count/sum(report.org$count))
+View(report.org.20per)
+report.org.20per = report.org %>%
+group_by(Reporting.organization.name) %>%
+summarise(count=n()) %>%
+arrange(desc(count)) %>%
+head(2400) %>%
+mutate(per = count/sum(as.numeric(report.org$count)))
+View(report.org.20per)
+sum(as.numeric(report.org$count))
+sum(report.org$count)
+View(report.org)
+# all
+report.org.all = report.org %>%
+group_by(Reporting.organization.name) %>%
+summarise(count=n()) %>%
+arrange(desc(count))
+report.org.20per = report.org %>%
+group_by(Reporting.organization.name) %>%
+summarise(count=n()) %>%
+arrange(desc(count)) %>%
+head(2400) %>%
+mutate(per = count/sum(as.numeric(report.org.all$count)))
+View(report.org.20per)
+sum(report.org.20per$per)
+View(data_clean)
+data_clean =  data %>%
+arrange( -total.submit, -remove.per)
+data = request %>%
+select(Reporting.organization.name,
+URLs.that.were.not.in.Google.s.search.index,
+URLs.for.which.we.took.no.action,
+URLs.pending.review,
+URLs.removed,
+abuser,
+total.submit)%>%
+group_by(Reporting.organization.name) %>%
+summarise(total.remove = sum(URLs.removed),
+total.not.in.index = sum(URLs.that.were.not.in.Google.s.search.index),
+total.no.action = sum(URLs.for.which.we.took.no.action) ,
+total.pending = sum(URLs.pending.review),
+total.submit = sum(total.submit),
+abuser = sum(abuser),
+remove.per = total.remove/total.submit,
+no.action.per = total.no.action/total.submit,
+not.in.index.per = total.not.in.index/total.submit,
+pending.per = total.pending/total.submit)
+data$abuser <- ifelse(data$abuser== 0,'False','Ture')
+data_clean =  data %>%
+arrange( -total.submit, -remove.per)
+View(data_clean)
+data_clean =  data %>%
+arrange( -total.submit)
+bad_organization =  data_clean %>%
+filter(remove.per < 0.1)
+bad_organization.10 = bad_organization %>%
+head(10)
+write.csv(bad_organization.10, file = "top10 bad-organization.csv")
+write.csv(bad_organization.10, file = "top10 bad-organization1.csv")
+good_organization = data_clean%>%
+filter(remove.per > 0.9)
+good_organization.10 = godd_organization %>%
+head(10)
+good_organization.10 = god_organization %>%
+head(10)
+good_organization.10 = good_organization %>%
+head(10)
+write.csv(good_organization.10, file = "top10 good-organization.csv")
+names(request)
+request_per = request %>%
+mutate(r.per = URLs.removed/total.submit) %>%
+filter(r.per < 0.1)
+801604/6952124
+request_per = request %>%
+mutate(r.per = URLs.removed/total.submit) %>%
+filter(r.per < 0.5)
+request_per = request %>%
+mutate(r.per = URLs.removed/total.submit) %>%
+filter(r.per >0.9)
+request_per = request %>%
+mutate(r.per = URLs.removed/total.submit) %>%
+filter(r.per >0.9, total.submit >1000)
+request_per = request %>%
+mutate(r.per = URLs.removed/total.submit) %>%
+filter(r.per >0.9, total.submit <1000)
+request_per = request %>%
+mutate(r.per = URLs.removed/total.submit) %>%
+filter(r.per <0.1, total.submit <1000)
+request_per = request %>%
+mutate(r.per = URLs.removed/total.submit) %>%
+filter(r.per <0.1, total.submit >1000)
+request_per = request %>%
+mutate(r.per = URLs.removed/total.submit) %>%
+filter(r.per >0.9, total.submit <1000)
+4236847/6952124
+request_per = request %>%
+mutate(r.per = URLs.removed/total.submit) %>%
+filter(r.per >0.9, total.submit <100)
+3569806/6952124
+request_per = request %>%
+mutate(r.per = URLs.removed/total.submit) %>%
+filter(r.per >0.9, total.submit <100)
+request_per = request %>%
+mutate(r.per = URLs.removed/total.submit) %>%
+filter(r.per >0.9, total.submit >100)
+request_per = request %>%
+mutate(r.per = URLs.removed/total.submit) %>%
+filter(r.per <0.1, total.submit >100)
+request_per = request %>%
+mutate(r.per = URLs.removed/total.submit) %>%
+filter(r.per <0.1, total.submit <100)
+(595547+203780)/6952124
+(1184594+203780)/6952124
+(1184594+3569806)/6952124
+(595547+3569806)/6952124
+ggplot(data_categ_owner,aes(x = Category),a.rm = FALSE) +
+geom_bar(stat="count", aes(fill = abuser),position = 'dodge')+
+xlab('Reliability') +
+ylab('Count') +
+ggtitle('Frequency Distribution of Reliable Level (Copyright Owner)') +
+scale_y_continuous(labels=scales::comma) +
+theme_bw() +
+theme(axis.text.x =element_text(size=16),
+axis.text.y=element_text(size=16),
+title=element_text(size=12),
+plot.title = element_text(hjust = 0.5))+
+geom_text(stat='count',aes(label=..count..),vjust=-1)
+geom_bar(stat="count"+
+# desired order
+data_categ_owner$Category <- factor(data_categ_owner$Category, levels = c('xHigh ( >0.9 )',
+'High ( >0.7 )',
+'Medium( >0.4)',
+'Low ( >0.1)',
+'xLow ( <0.1)'))
+ggplot(data_categ_owner,aes(x = Category),a.rm = FALSE) +
+geom_bar(stat="count", fill = 'blue')+
+xlab('Reliability') +
+ylab('Count') +
+ggtitle('Frequency Distribution of Reliable Level (Copyright Owner)') +
+scale_y_continuous(labels=scales::comma) +
+theme_bw() +
+theme(axis.text.x =element_text(size=16),
+axis.text.y=element_text(size=16),
+title=element_text(size=12),
+plot.title = element_text(hjust = 0.5))+
+geom_text(stat='count',aes(label=..count..),vjust=-1)
+ggplot(data_categ_owner,aes(x = Category),a.rm = FALSE) +
+geom_bar(stat="count", color = 'blue')+
+xlab('Reliability') +
+ylab('Count') +
+ggtitle('Frequency Distribution of Reliable Level (Copyright Owner)') +
+scale_y_continuous(labels=scales::comma) +
+theme_bw() +
+theme(axis.text.x =element_text(size=16),
+axis.text.y=element_text(size=16),
+title=element_text(size=12),
+plot.title = element_text(hjust = 0.5))+
+geom_text(stat='count',aes(label=..count..),vjust=-1)
+ggplot(data_categ_owner,aes(x = Category),a.rm = FALSE) +
+geom_bar(stat="count", fill = 'blue')+
+xlab('Reliability') +
+ylab('Count') +
+ggtitle('Frequency Distribution of Reliable Level (Copyright Owner)') +
+scale_y_continuous(labels=scales::comma) +
+theme_bw() +
+theme(axis.text.x =element_text(size=16),
+axis.text.y=element_text(size=16),
+title=element_text(size=12),
+plot.title = element_text(hjust = 0.5))+
+geom_text(stat='count',aes(label=..count..),vjust=-1)
+# desired order
+data_categ_owner$Category <- factor(data_categ_owner$Category, levels = c('xHigh ( >0.9 )',
+'High ( >0.7 )',
+'Medium( >0.4)',
+'Low ( >0.1)',
+'xLow ( <0.1)'))
+ggplot(data_categ_owner,aes(x = Category),a.rm = FALSE) +
+geom_bar(stat="count", fill = 'blue')+
+xlab('Reliability') +
+ylab('Count') +
+ggtitle('Frequency Distribution of Reliable Level (Copyright Owner)') +
+scale_y_continuous(labels=scales::comma) +
+theme_bw() +
+theme(axis.text.x =element_text(size=16),
+axis.text.y=element_text(size=16),
+title=element_text(size=12),
+plot.title = element_text(hjust = 0.5))+
+geom_text(stat='count',aes(label=..count..),vjust=-1)
+data_categ_owner = data_clean_owner %>%
+mutate(Category =
+case_when(
+remove.per > 0.9 ~ 'xHigh ( >0.9 )',
+remove.per > 0.7 ~ 'High ( >0.7 )',
+remove.per > 0.4 ~ 'Medium( >0.4)',
+remove.per > 0.1 ~ 'Low ( >0.1)',
+TRUE ~ 'xLow ( <0.1)'
+) )
+# get category and their label's graph
+plot.cat.owner<- data_categ_owner %>%
+select(abuser, Category) %>%
+group_by(Category) %>%
+summarise()
+# desired order
+data_categ_owner$Category <- factor(data_categ_owner$Category, levels = c('xHigh ( >0.9 )',
+'High ( >0.7 )',
+'Medium( >0.4)',
+'Low ( >0.1)',
+'xLow ( <0.1)'))
+ggplot(data_categ_owner,aes(x = Category),a.rm = FALSE) +
+geom_bar(stat="count", fill = 'blue')+
+xlab('Reliability') +
+ylab('Count') +
+ggtitle('Frequency Distribution of Reliable Level (Copyright Owner)') +
+scale_y_continuous(labels=scales::comma) +
+theme_bw() +
+theme(axis.text.x =element_text(size=16),
+axis.text.y=element_text(size=16),
+title=element_text(size=12),
+plot.title = element_text(hjust = 0.5))+
+geom_text(stat='count',aes(label=..count..),vjust=-1)
+View(data_categ_owner)
+# desired order
+data_categ_owner$Category <- factor(data_categ_owner$Category, levels = c('xHigh ( >0.9 )',
+'High ( >0.7 )',
+'Medium( >0.4)',
+'Low ( >0.1)',
+'xLow ( <0.1)'))
+ggplot(data_categ_owner,aes(x = Category),a.rm = FALSE) +
+geom_bar(stat="count", fill = 'blue')+
+xlab('Reliability') +
+ylab('Count') +
+ggtitle('Frequency Distribution of Reliable Level (Copyright Owner)') +
+scale_y_continuous(labels=scales::comma) +
+theme_bw() +
+theme(axis.text.x =element_text(size=16),
+axis.text.y=element_text(size=16),
+title=element_text(size=12),
+plot.title = element_text(hjust = 0.5))+
+geom_text(stat='count',aes(label=..count..),vjust=-1)
+#
+data.owner = request %>%
+select(Copyright.owner.name,
+URLs.that.were.not.in.Google.s.search.index,
+URLs.for.which.we.took.no.action,
+URLs.pending.review,
+URLs.removed,
+abuser,
+total.submit)%>%
+group_by(Copyright.owner.name) %>%
+summarise(total.remove = sum(URLs.removed),
+total.not.in.index = sum(URLs.that.were.not.in.Google.s.search.index),
+total.no.action = sum(URLs.for.which.we.took.no.action) ,
+total.pending = sum(URLs.pending.review),
+total.submit = sum(total.submit),
+abuser = sum(abuser),
+remove.per = total.remove/total.submit,
+no.action.per = total.no.action/total.submit,
+not.in.index.per = total.not.in.index/total.submit,
+pending.per = total.pending/total.submit)
+data.owner$abuser <- ifelse(data.owner$abuser== 0,'False','Ture')
+data_clean_owner =  data.owner %>%
+arrange( -total.submit, -remove.per)
+data_categ_owner = data_clean_owner %>%
+mutate(Category =
+case_when(
+remove.per > 0.9 ~ 'xHigh ( >0.9 )',
+remove.per > 0.7 ~ 'High ( >0.7 )',
+remove.per > 0.4 ~ 'Medium( >0.4)',
+remove.per > 0.1 ~ 'Low ( >0.1)',
+TRUE ~ 'xLow ( <0.1)'
+) )
+# get category and their label's graph
+plot.cat.owner<- data_categ_owner %>%
+select(abuser, Category) %>%
+group_by(Category) %>%
+summarise()
+# desired order
+data_categ_owner$Category <- factor(data_categ_owner$Category, levels = c('xHigh ( >0.9 )',
+'High ( >0.7 )',
+'Medium( >0.4)',
+'Low ( >0.1)',
+'xLow ( <0.1)'))
+ggplot(data_categ_owner,aes(x = Category),a.rm = FALSE) +
+geom_bar(stat="count", fill = 'blue')+
+xlab('Reliability') +
+ylab('Count') +
+ggtitle('Frequency Distribution of Reliable Level (Copyright Owner)') +
+scale_y_continuous(labels=scales::comma) +
+theme_bw() +
+theme(axis.text.x =element_text(size=16),
+axis.text.y=element_text(size=16),
+title=element_text(size=12),
+plot.title = element_text(hjust = 0.5))+
+geom_text(stat='count',aes(label=..count..),vjust=-1)
+# desired order
+data_categ_owner$Category <- as.factor(data_categ_owner$Category, levels = c('xHigh ( >0.9 )',
+'High ( >0.7 )',
+'Medium( >0.4)',
+'Low ( >0.1)',
+'xLow ( <0.1)'))
+# desired order
+data_categ_owner$Category <- as.factor(data_categ_owner$Category, levels = c('xHigh ( >0.9 )',
+'High ( >0.7 )',
+'Medium( >0.4)',
+'Low ( >0.1)',
+'xLow ( <0.1)'))
+# desired order
+data_categ_owner$Category <- factor(data_categ_owner$Category, levels = c('xHigh ( >0.9 )',
+'High ( >0.7 )',
+'Medium( >0.4)',
+'Low ( >0.1)',
+'xLow ( <0.1)'))
+ggplot(data_categ,aes(x = Category),a.rm = FALSE) +
+geom_bar(stat="count", fill='blue')+
+xlab('Reliability') +
+ylab('Count') +
+ggtitle('Frequency Distribution of Reliable Level') +
+scale_y_continuous(labels=scales::comma) +
+theme_bw() +
+theme(axis.text.x =element_text(size=16),
+axis.text.y=element_text(size=16),
+title=element_text(size=12),
+plot.title = element_text(hjust = 0.5))+
+geom_text(stat='count',aes(label=..count..),vjust=-1)
+ggplot(data_categ,aes(x = Category),a.rm = FALSE) +
+geom_bar(stat="count", fill='blue')+
+xlab('Reliability') +
+ylab('Count') +
+ggtitle('Orgnization Distribution of Reliable Level') +
+scale_y_continuous(labels=scales::comma) +
+theme_bw() +
+theme(axis.text.x =element_text(size=16),
+axis.text.y=element_text(size=16),
+title=element_text(size=12),
+plot.title = element_text(hjust = 0.5))+
+geom_text(stat='count',aes(label=..count..),vjust=-1)
+ggplot(data_categ_owner,aes(x = Category),a.rm = FALSE) +
+geom_bar(stat="count", fill = 'blue')+
+xlab('Reliability') +
+ylab('Count') +
+ggtitle('Copyright Owner Distribution of Reliable Level') +
+scale_y_continuous(labels=scales::comma) +
+theme_bw() +
+theme(axis.text.x =element_text(size=16),
+axis.text.y=element_text(size=16),
+title=element_text(size=12),
+plot.title = element_text(hjust = 0.5))+
+geom_text(stat='count',aes(label=..count..),vjust=-1)
+setwd("~/Desktop/DSO522 FINAL PROJECT")
+Residual= read.csv('Residual.csv')
+tsdisplay(Residual)
+library(forecast)
+tsdisplay(Residual)
+#Upload libraries
+library(forecast)
+library(ggplot2)
+data=read.csv("data.csv")
+View(data)
+head(data,3)
+tail(data,3)
+data.ts=ts(data$New.Hire,start=c(2000,12),frequency =12 )
+data.ts
+# senario 1
+train.start.1=c(2000,12)
+train.end.1=c(2016,12)
+test.start.1=c(2017,1)
+test.end.1=c(2017,12)
+train.ts.1=window(data.ts,end=train.end.1)
+test.ts.1=window(data.ts,start=test.start.1, end = test.end.1)
+nTrain.1=length(train.ts.1)
+nTest.1=length(test.ts.1)
+M1=snaive(train.ts.1,h=nTest.1,level=95,lambda="auto")
+# Accuracy metrics
+round(accuracy(M1,test.ts.1)[,c("RMSE","MAPE")],2) # rounded to 2nd decimal digit
+# Residual diagnistics
+checkresiduals(M1)
+# Build teh best smoothing model
+M2=ets(train.ts.1,lambda="auto")
+# What is it?
+M2
+M2F=forecast(M2,h=nTest,level=95)
+M2F=forecast(M2,h=nTest.1,level=95)
+# Accuracy metrics
+round(accuracy(M2F,test.ts.1)[,c("RMSE","MAPE")],2) # rounded to 2nd decimal digit
+#               RMSE MAPE
+#Training set 180.18 3.08
+#Test set     212.37 3.54
+# residual diagnostics
+checkresiduals(M2)
+# Build the best arima model
+M4=auto.arima(train.ts.1,lambda="auto")
+# What is it?
+M4
+# Generate forecast
+M4F=forecast(M4,h=nTest.1,level=95)
+# We may print the forecasts and corresponding 95 prediction intervals [lower bound,Upper bound]
+M4F
+# Accuracy metrics
+round(accuracy(M4F,test.ts.1)[,c("RMSE","MAPE")],2) # rounded to 2nd decimal digit
+# senario 2
+train.start.2=c(2000,12)
+train.end.2=c(2016,12)
+test.start.2=c(2017,1)
+test.end.2=c(2018,9)
+train.ts.2=window(data.ts,end=train.end.2)
+test.ts.2=window(data.ts,start=test.start.2, end = test.end.2)
+nTrain.2=length(train.ts.2)
+nTest.2=length(test.ts.2)
+M1.2=snaive(train.ts.2,h=nTest.2,level=95,lambda="auto")
+# Accuracy metrics
+round(accuracy(M1.2,test.ts.2)[,c("RMSE","MAPE")],2) # rounded to 2nd decimal digit
+# Residual diagnistics
+checkresiduals(M1)
+# Build teh best smoothing model
+M2.2=ets(train.ts.2,lambda="auto")
+# What is it?
+M2.2
+M2.2F=forecast(M2.2,h=nTest.2,level=95)
+# Accuracy metrics
+round(accuracy(M2.2F,test.ts.2)[,c("RMSE","MAPE")],2) # rounded to 2nd decimal digit
+# residual diagnostics
+checkresiduals(M2)
+# Build the best arima model
+M4.2=auto.arima(train.ts.2,lambda="auto")
+# What is it?
+M4.2
+# Generate forecast
+M4.2F=forecast(M4.2,h=nTest.2,level=95)
+# We may print the forecasts and corresponding 95 prediction intervals [lower bound,Upper bound]
+M4F
+# Accuracy metrics
+round(accuracy(M4.2F,test.ts.2)[,c("RMSE","MAPE")],2) # rounded to 2nd decimal digit
+# residual diagnostics
+checkresiduals(M4)
+M.ARIMA=auto.arima(data.ts,lambda="auto")
+# Forecast future
+MF.ARIMA=forecast(M.ARIMA,h=12,level=95)
+# Print Forecasts and PI's
+MF.ARIMA
+plot(MF.ARIMA)
